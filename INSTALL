@@ -1,0 +1,22 @@
+Manual de instalación, administración y configuración.
+
+El servidor ha sido desarrollado con python 3.8 y ha sido probado en un sistema operativo Linux.
+Aún así, debería de funcionar en otros sistemas operativos siempre y cuando python3 o superior esté instalado.
+
+El comando para ejecutar el servidor es "python3 serv7". Con esto bastaría para levantar un servidor en todos los interfaces, en el puerto predeterminado que es 64209, con cola de espera de 5 clientes.
+Sin embargo se puede personalizar mediante las siguientes opciones:
+	-a <Dirección IP>
+		Dirección IP del interfaz en el que quieras levantar el servidor.
+	-p <Puerto>
+		Puerto (Solo se permite TCP) en el cual se levantará el servidor.
+	-b <Cola de espera>
+		Si se quiere que la cola de espera sea diferente de 5
+Finalmente existe la opción de ejecutar el servidor como un demonio, en cuyo caso la información irá al system log. Para ello ha de usar la opción:
+	-d
+	
+Por último remarcar que los nombres de usuario y las contraseñas son guardadas en el archivo usrdata que debe de encontrarse en la misma carpeta que el script.
+El formato es 
+	linea(2n): nombre de usuario
+	linea(2n+1): hash de la contraseña de usuario.
+
+

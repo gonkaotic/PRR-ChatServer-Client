@@ -1,0 +1,11 @@
+Manual de arquitectura.
+
+El Proyecto está dividido en cuatro archivos:
+
+tcp_constants.py contiene valores que son comunes entre el servidor y el cliente, es decir los protocolos, la codificacion, el separador de parametros y los valores por defecto de dirección y puerto.
+
+Backbone.py contiene las clases de NetworkFormatManager y NetworkSender que son usadas tanto por cliente como servidor para que haya uniformidad a la hora de enviar mensajes y formatearlos correctamente.
+
+serv7.py contiene dos clases, Server, la cual se encarga únicamente de recibir las conexiones y mensajes de los clientes, y ServerLogic, la cual procesa los mensajes y es la que realmente tiene la lógica del servidor dentro. Además es el script a ejecutar en caso de querer levantar el servidor
+
+cli7.py finalmente contiene a la clase cliente, que se encarga de analizar las respuestas del servidor asi como los posibles comandos del usuario. Este es el script a ejecutar en caso de querer ejecutar un cliente.

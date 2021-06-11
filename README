@@ -1,0 +1,33 @@
+Esta aplicación ha sido desarrollada en python3.8, en un sistema operativo linux.
+
+Para poder usarlo se ha de ejecutar con el comando "python3 cli7.py" añadiendo diferentes parametros en función de cuanto se quiera personalizar la aplicacion.
+	La opción -u es obligatoria y viene seguida de el nombre de usuario.
+	La opción -c es obligatorio y viene seguida de la contraseña del usuario.
+	La opción -a no es obligatoria. Sirve para indicar la direccion en la que se encuentra el servidor.
+	La opción -p no es obligatoria. Sirve para indicar el puerto en el que se encuentra el servicio.
+	
+Una vez autentificado, el usuario se encontrará en la sala principal, también llamada Hall.
+En ella podrá conversar con otros usuarios en está misma sala. Sencillamente necesita escribir en su terminal y pulsar enter para enviar el mensaje.
+
+La aplicación permite distintos tipos de comandos. Para escribir un comando se ha empezar una línea nueva y empezar por el símbolo "/" seguido del comando.
+El listado de comandos es el que aparece a continuación.
+
+	/users
+		Lista los usuarios conectados al servidor
+	/chatroom
+		Esta tiene diferentes opciones:
+			/chatroom list
+				Lista las salas disponibles en el servidor y el número de usuarios conectados a ellas.
+			/chatroom join <nombre de la sala>
+				Permite unirse a la sala especificada. Si la sala no existe, esta será creada.
+			/chatroom delete <nombre de la sala>
+				Permite eliminar una sala. En caso de que la sala contuviera usuarios, estos serán movidos a la sala principal.
+				La sala principal no puede ser eliminada.
+	/dm
+		Permite mensages directos entre usuarios. Su uso es:
+		/dm <nombreDeUsuarioReceptor>: <msg>
+		notese que entre nombre de usuario y los dos puntos no hay espacio
+	/shutdown
+		Permite apagar el servidor
+	/kick <Username>
+		Permite expulsar a un usuario del servidor.
