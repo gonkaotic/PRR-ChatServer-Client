@@ -318,14 +318,14 @@ def main():
     parser.add_argument(
         "-a",
         "--address",
-        default=DEFAULT_ADDRESS,
+        default=tcp.DEFAULT_ADDRESS,
         help="Specify the IP address on which the server listens",
     )
     parser.add_argument(
         "-p",
         "--port",
         type=int,
-        default=DEFAULT_PORT,
+        default=tcp.DEFAULT_PORT,
         help="Specify the port on which the server listens",
     )
     parser.add_argument(
@@ -338,7 +338,6 @@ def main():
     parser.add_argument(
         "-d",
         "--daemon",
-        type=bool,
         action='store_true',
         help="Run the server as a demon",
     )
@@ -367,7 +366,7 @@ def main():
     if args.backlog != -1:
         server = Server(ip_address=args.address, port=args.port, is_daemon=args.daemon, backlog=args.backlog)
     else:
-        server = Server(ip_address=ip_address, port=port, is_daemon=daemon)
+        server = Server(ip_address=args.address, port=args.port, is_daemon=args.daemon)
     server.start()
 
 
