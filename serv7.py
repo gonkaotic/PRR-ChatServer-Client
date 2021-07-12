@@ -314,7 +314,7 @@ class LoginException(Exception):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run a chat server room")
+    parser = argparse.ArgumentParser(description="Run a chat room server")
     parser.add_argument(
         "-a",
         "--address",
@@ -342,27 +342,6 @@ def main():
         help="Run the server as a demon",
     )
     args = parser.parse_args()
-    """
-    ip_address = tcp.DEFAULT_ADDRESS
-    port = tcp.DEFAULT_PORT
-    backlog = -1
-    daemon = False
-    for i, argument in enumerate(sys.argv):
-        if argument[0] == '-':
-            option = argument[1]
-            try:
-                if option == 'a':  # address
-                    ip_address = sys.argv[i + 1]
-                elif option == 'p':  # port
-                    port = int(sys.argv[i + 1])
-                elif option == 'b':  # Backlog
-                    backlog = sys.argv[i + 1]
-                elif option == 'd': # Daemon
-                    daemon = True
-            except IndexError:
-                os.write(2, b'Option \'' + option.encode() + b'\' needs a parameter')
-                sys.exit(-1)
-    """
     if args.backlog != -1:
         server = Server(ip_address=args.address, port=args.port, is_daemon=args.daemon, backlog=args.backlog)
     else:

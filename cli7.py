@@ -1,6 +1,7 @@
 import tcp_constants as tcp
 import os, socket, sys, select
 import Backbone
+import argparse
 
 class CommandException(Exception):
     pass
@@ -185,32 +186,38 @@ class Client():
                 sys.exit(0)
 
 
+def main():
+    parser = argparse.ArgumentParser(description="Run a chat room client")
+    parser.add_argument(
+        "-u",
+        "--username",
+        required=True,
+        help="Specify the user nickname for the server",
+    )
+    parser.add_argument(
+        "-c",
+        "--password",
+        required=True,
+        help="Specify the password for the user",
+    )
+    parser.add_argument(
+        "-a",
+        "--address",
+        default=tcp.DEFAULT_ADDRESS,
+        help="Specify the IP address of the server to connect to",
+    )
+    parser.add_argument(
+        "-p",
+        "--port",
+        type=int,
+        default=tcp.DEFAULT_PORT,
+        help="Specify the port on which the server listens",
+    )
+
+    args = parser.parse_args()
+    client = Client(username=args.username, password=args.password, ip=args.address, port=args.port)
+    client.connect()
+
+
 if __name__ == "__main__":
-    username = ''
-    password = ''
-    ip_address = tcp.DEFAULT_ADDRESS
-    port = tcp.DEFAULT_PORT
-    for i, argument in enumerate(sys.argv):
-        if argument[0] == '-':
-            option = argument[1]
-            try:
-                if option == 'a': #address
-                    ip_address = sys.argv[i+1]
-                elif option == 'p': #port
-                    port = int(sys.argv[i+1])
-                elif option == 'u': #username
-                    username = sys.argv[i+1]
-                elif option == 'c':  # password
-                    password = sys.argv[i + 1]
-            except IndexError:
-                os.write(2, b'Option \''+ option+'\' needs a parameter')
-                sys.exit(-1)
-    if username != '' and password != '':
-        client = Client(username=username, password=password, ip=ip_address, port=port)
-        client.connect()
-    else:
-        os.write(2, b"A username and a password are required\n")
-
-
-
-
+    main()
