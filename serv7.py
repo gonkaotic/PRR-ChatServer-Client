@@ -2,6 +2,7 @@ import socket, os, sys, syslog, time, hashlib
 from select import select
 import tcp_constants as tcp
 import Backbone as bbn
+import argparse
 
 class Server:
 
@@ -312,7 +313,37 @@ class LoginException(Exception):
     pass
 
 
-if __name__ == "__main__":
+def main():
+    parser = argparse.ArgumentParser(description="Run a chat server room")
+    parser.add_argument(
+        "-a",
+        "--address",
+        default=DEFAULT_ADDRESS,
+        help="Specify the IP address on which the server listens",
+    )
+    parser.add_argument(
+        "-p",
+        "--port",
+        type=int,
+        default=DEFAULT_PORT,
+        help="Specify the port on which the server listens",
+    )
+    parser.add_argument(
+        "-b",
+        "--backlog",
+        type=int,
+        default=-1,
+        help="Specify the backlog of the server(clients that can wait while others are being attended)",
+    )
+    parser.add_argument(
+        "-d",
+        "--daemon",
+        type=bool,
+        action='store_true',
+        help="Run the server as a demon",
+    )
+    args = parser.parse_args()
+    """
     ip_address = tcp.DEFAULT_ADDRESS
     port = tcp.DEFAULT_PORT
     backlog = -1
@@ -332,8 +363,13 @@ if __name__ == "__main__":
             except IndexError:
                 os.write(2, b'Option \'' + option.encode() + b'\' needs a parameter')
                 sys.exit(-1)
-    if backlog != -1:
-        server = Server(ip_address=ip_address, port=port, is_daemon=daemon, backlog=backlog)
+    """
+    if args.backlog != -1:
+        server = Server(ip_address=args.address, port=args.port, is_daemon=args.daemon, backlog=args.backlog)
     else:
         server = Server(ip_address=ip_address, port=port, is_daemon=daemon)
     server.start()
+
+
+if __name__ == "__main__":
+    main()
